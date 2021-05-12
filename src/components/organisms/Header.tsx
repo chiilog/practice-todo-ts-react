@@ -13,7 +13,7 @@ export const Header: VFC = memo(() => {
 			</Box>
 			<Flex m={4}>
 				<Box flex="1">
-					<Input placeholder="Basic usage" bg="white" />
+					<Input placeholder="TODOを入力" bg="white" />
 				</Box>
 				<Box ml={2}>
 					<PrimaryButton>追加</PrimaryButton>
