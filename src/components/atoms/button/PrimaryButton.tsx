@@ -1,11 +1,11 @@
+import React, { memo, VFC } from "react";
 import { Button } from "@chakra-ui/react";
-import React from "react";
 
 type Props = {
 	children: string;
 };
 
-export const PrimaryButton = (props: Props) => {
+export const PrimaryButton: VFC<Props> = memo((props) => {
 	const { children } = props;
 
 	return (
@@ -13,4 +13,4 @@ export const PrimaryButton = (props: Props) => {
 			{children}
 		</Button>
 	);
-};
+});
