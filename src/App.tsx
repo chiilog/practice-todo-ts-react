@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, ChakraProvider, List } from "@chakra-ui/react";
 
 import theme from "./theme/theme";
 import { Header } from "./components/organisms/Header";
 import { TodoItem } from "./components/molecules/TodoItem";
-import { useAllTodos } from "./hooks/useAllTodos";
+import { TodosContext } from "./providers/TodosProvider";
 
 export const App = () => {
 	const onClickComplete = () => alert("completed!");
 	const onClickDelete = () => alert("deleted!");
 	const onClickTextFix = () => alert("fix!");
 
-	const { todos } = useAllTodos();
+	const { todos } = useContext(TodosContext);
 
 	return (
 		<ChakraProvider theme={theme}>
