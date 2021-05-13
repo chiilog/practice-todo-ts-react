@@ -5,13 +5,14 @@ import React, { memo, VFC } from "react";
 type Props = {
 	onClickComplete: () => void;
 	onClickDelete: () => void;
+	onClickTextFix: () => void;
 };
 
 /**
  * TODO: 完了の場合文字色は薄いグレー（gray.300）でチェックマークは緑（green.500）にする
  */
 export const TodoItem: VFC<Props> = memo((props) => {
-	const { onClickComplete, onClickDelete } = props;
+	const { onClickComplete, onClickDelete, onClickTextFix } = props;
 
 	return (
 		<ListItem p={3} borderBottom="1px solid" borderBottomColor="gray.100">
@@ -26,7 +27,12 @@ export const TodoItem: VFC<Props> = memo((props) => {
 					onClick={onClickComplete}
 				/>
 				<Box mx={1} flex={1}>
-					<Input value="TODOアイテム" variant="unstyle" isReadOnly />
+					<Input
+						value="TODOアイテム"
+						variant="unstyle"
+						onClick={onClickTextFix}
+						isReadOnly
+					/>
 				</Box>
 				<IconButton
 					aria-label="完了"
