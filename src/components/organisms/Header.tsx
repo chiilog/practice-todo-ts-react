@@ -2,12 +2,26 @@ import React, { memo, useState, VFC } from "react";
 import { Box, Flex, Heading, Input } from "@chakra-ui/react";
 
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
+import { useAllTodos } from "../../hooks/useAllTodos";
 
 export const Header: VFC = memo(() => {
 	const [todoText, setTodoText] = useState<string>("");
+	const { todos, setTodos } = useAllTodos();
 
 	const onChangeTodoText = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTodoText(event.target.value);
+	};
+
+	const onClickAddTodo = () => {
+		setTodos([
+			...todos,
+			{
+				id: todos.length,
+				todo: todoText,
+				completed: false,
+			},
+		]);
+		setTodoText("");
 	};
 
 	return (
@@ -27,7 +41,9 @@ export const Header: VFC = memo(() => {
 					/>
 				</Box>
 				<Box ml={2}>
-					<PrimaryButton>追加</PrimaryButton>
+					<PrimaryButton onClickButton={onClickAddTodo}>
+						追加
+					</PrimaryButton>
 				</Box>
 			</Flex>
 		</>
