@@ -30,7 +30,6 @@ export const TodosProvider = (props: { children: ReactNode }) => {
 			completed: true,
 		},
 	]);
-	console.log(todos);
 
 	return (
 		<TodosContext.Provider value={{ todos, setTodos }}>
