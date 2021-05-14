@@ -1,4 +1,11 @@
-import React, { memo, useCallback, useContext, useState, VFC } from "react";
+import React, {
+	FormEvent,
+	memo,
+	useCallback,
+	useContext,
+	useState,
+	VFC,
+} from "react";
 import { Box, Flex, Heading, Input } from "@chakra-ui/react";
 
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
@@ -33,21 +40,26 @@ export const Header: VFC = memo(() => {
 					TODO管理
 				</Heading>
 			</Box>
-			<Flex m={4}>
-				<Box flex="1">
-					<Input
-						placeholder="TODOを入力"
-						bg="white"
-						value={todoText}
-						onChange={onChangeTodoText}
-					/>
-				</Box>
-				<Box ml={2}>
-					<PrimaryButton onClickButton={onClickAddTodo}>
-						追加
-					</PrimaryButton>
-				</Box>
-			</Flex>
+			<form
+				onSubmit={(e: FormEvent<HTMLFormElement>) => {
+					e.preventDefault();
+					onClickAddTodo();
+				}}
+			>
+				<Flex m={4}>
+					<Box flex="1">
+						<Input
+							placeholder="TODOを入力"
+							bg="white"
+							value={todoText}
+							onChange={onChangeTodoText}
+						/>
+					</Box>
+					<Box ml={2}>
+						<PrimaryButton buttonType="submit">追加</PrimaryButton>
+					</Box>
+				</Flex>
+			</form>
 		</>
 	);
 });
