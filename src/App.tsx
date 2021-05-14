@@ -19,26 +19,15 @@ export const App = () => {
 		newTodos.splice(index, 1);
 		setTodos(newTodos);
 	};
-	const onClickTextEdit = (
-		event: React.MouseEvent<HTMLInputElement>,
-		index: number
-	) => {
+	const onClickTextEdit = (event: React.MouseEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
 		target.readOnly = !target.readOnly;
-
-		const aria = target.attributes.getNamedItem("aria-readonly");
-		let ariaBool: string = aria ? aria.value : "false";
-		target.setAttribute(
-			"aria-readonly",
-			ariaBool === "true" ? "false" : "true"
-		);
+		target.setAttribute("aria-readonly", `"${target.readOnly}"`);
 	};
-	const onBlurTextEdit = (
-		event: React.FocusEvent<HTMLInputElement>,
-		index: number
-	) => {
+	const onBlurTextEdit = (event: React.FocusEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
 		target.readOnly = true;
+		target.setAttribute("aria-readonly", "true");
 	};
 	const onChangeTextEdit = (
 		event: React.ChangeEvent<HTMLInputElement>,
@@ -64,10 +53,10 @@ export const App = () => {
 						onClickDelete={() => onClickDelete(index)}
 						onClickTextEdit={(
 							event: React.MouseEvent<HTMLInputElement>
-						) => onClickTextEdit(event, index)}
+						) => onClickTextEdit(event)}
 						onBlurTextEdit={(
 							event: React.FocusEvent<HTMLInputElement>
-						) => onBlurTextEdit(event, index)}
+						) => onBlurTextEdit(event)}
 						onChangeTextEdit={(
 							event: React.ChangeEvent<HTMLInputElement>
 						) => onChangeTextEdit(event, index)}
