@@ -7,13 +7,20 @@ type Props = {
 	onClickComplete: () => void;
 	onClickDelete: () => void;
 	onClickTextFix: () => void;
+	isCompleted: boolean;
 };
 
 /**
  * TODO: 完了の場合文字色は薄いグレー（gray.300）でチェックマークは緑（green.500）にする
  */
 export const TodoItem: VFC<Props> = memo((props) => {
-	const { text, onClickComplete, onClickDelete, onClickTextFix } = props;
+	const {
+		text,
+		onClickComplete,
+		onClickDelete,
+		onClickTextFix,
+		isCompleted,
+	} = props;
 
 	return (
 		<ListItem p={3} borderBottom="1px solid" borderBottomColor="gray.100">
@@ -23,8 +30,7 @@ export const TodoItem: VFC<Props> = memo((props) => {
 					icon={<CheckIcon />}
 					variant="unstyled"
 					size="lg"
-					color="gray.100"
-					_hover={{ color: "green.500" }}
+					color={isCompleted ? "green.500" : "gray.100"}
 					onClick={onClickComplete}
 				/>
 				<Box mx={1} flex={1}>
@@ -32,6 +38,7 @@ export const TodoItem: VFC<Props> = memo((props) => {
 						value={text}
 						variant="unstyle"
 						onClick={onClickTextFix}
+						color={isCompleted ? "gray.300" : "black"}
 						isReadOnly
 					/>
 				</Box>

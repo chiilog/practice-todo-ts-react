@@ -31,6 +31,7 @@ export const App = () => {
 						onClickComplete={() => onClickComplete(index)}
 						onClickDelete={onClickDelete}
 						onClickTextFix={onClickTextFix}
+						isCompleted={res.completed}
 					/>
 				))}
 			</List>
