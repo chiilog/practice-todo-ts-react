@@ -6,7 +6,9 @@ type Props = {
 	text: string;
 	onClickComplete: () => void;
 	onClickDelete: () => void;
-	onClickTextFix: () => void;
+	onClickTextEdit: (e: React.MouseEvent<HTMLInputElement>) => void;
+	onBlurTextEdit: (e: React.FocusEvent<HTMLInputElement>) => void;
+	onChangeTextEdit: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	isCompleted: boolean;
 };
 
@@ -18,7 +20,9 @@ export const TodoItem: VFC<Props> = memo((props) => {
 		text,
 		onClickComplete,
 		onClickDelete,
-		onClickTextFix,
+		onClickTextEdit,
+		onBlurTextEdit,
+		onChangeTextEdit,
 		isCompleted,
 	} = props;
 
@@ -37,9 +41,13 @@ export const TodoItem: VFC<Props> = memo((props) => {
 					<Input
 						value={text}
 						variant="unstyle"
-						onClick={onClickTextFix}
+						onClick={onClickTextEdit}
 						color={isCompleted ? "gray.300" : "black"}
+						onBlur={onBlurTextEdit}
+						onChange={onChangeTextEdit}
 						isReadOnly
+						bg="gray.50"
+						_readOnly={{ background: "white" }}
 					/>
 				</Box>
 				<IconButton

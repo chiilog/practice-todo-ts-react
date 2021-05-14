@@ -19,7 +19,35 @@ export const App = () => {
 		newTodos.splice(index, 1);
 		setTodos(newTodos);
 	};
-	const onClickTextFix = () => alert("fix!");
+	const onClickTextEdit = (
+		event: React.MouseEvent<HTMLInputElement>,
+		index: number
+	) => {
+		const target = event.currentTarget;
+		target.readOnly = !target.readOnly;
+
+		const aria = target.attributes.getNamedItem("aria-readonly");
+		let ariaBool: string = aria ? aria.value : "false";
+		target.setAttribute(
+			"aria-readonly",
+			ariaBool === "true" ? "false" : "true"
+		);
+	};
+	const onBlurTextEdit = (
+		event: React.FocusEvent<HTMLInputElement>,
+		index: number
+	) => {
+		const target = event.currentTarget;
+		target.readOnly = true;
+	};
+	const onChangeTextEdit = (
+		event: React.ChangeEvent<HTMLInputElement>,
+		index: number
+	) => {
+		const editTodo = [...todos];
+		editTodo[index].todo = event.target.value;
+		setTodos(editTodo);
+	};
 
 	return (
 		<ChakraProvider theme={theme}>
@@ -34,7 +62,15 @@ export const App = () => {
 						text={res.todo}
 						onClickComplete={() => onClickComplete(index)}
 						onClickDelete={() => onClickDelete(index)}
-						onClickTextFix={onClickTextFix}
+						onClickTextEdit={(
+							event: React.MouseEvent<HTMLInputElement>
+						) => onClickTextEdit(event, index)}
+						onBlurTextEdit={(
+							event: React.FocusEvent<HTMLInputElement>
+						) => onBlurTextEdit(event, index)}
+						onChangeTextEdit={(
+							event: React.ChangeEvent<HTMLInputElement>
+						) => onChangeTextEdit(event, index)}
 						isCompleted={res.completed}
 					/>
 				))}
