@@ -14,7 +14,11 @@ export const App = () => {
 		newTodos[index].completed = !newTodos[index].completed;
 		setTodos(newTodos);
 	};
-	const onClickDelete = () => alert("deleted!");
+	const onClickDelete = (index: number) => {
+		const newTodos = [...todos];
+		newTodos.splice(index, 1);
+		setTodos(newTodos);
+	};
 	const onClickTextFix = () => alert("fix!");
 
 	return (
@@ -29,7 +33,7 @@ export const App = () => {
 						key={index}
 						text={res.todo}
 						onClickComplete={() => onClickComplete(index)}
-						onClickDelete={onClickDelete}
+						onClickDelete={() => onClickDelete(index)}
 						onClickTextFix={onClickTextFix}
 						isCompleted={res.completed}
 					/>
