@@ -12,9 +12,6 @@ type Props = {
 	isCompleted: boolean;
 };
 
-/**
- * TODO: 完了の場合文字色は薄いグレー（gray.300）でチェックマークは緑（green.500）にする
- */
 export const TodoItem: VFC<Props> = memo((props) => {
 	const {
 		text,
@@ -51,7 +48,7 @@ export const TodoItem: VFC<Props> = memo((props) => {
 					/>
 				</Box>
 				<IconButton
-					aria-label="完了"
+					aria-label="削除"
 					icon={<CloseIcon />}
 					variant="unstyled"
 					size="md"
