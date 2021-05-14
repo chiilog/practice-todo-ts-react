@@ -7,11 +7,15 @@ import { TodoItem } from "./components/molecules/TodoItem";
 import { TodosContext } from "./providers/TodosProvider";
 
 export const App = () => {
-	const onClickComplete = () => alert("completed!");
+	const { todos, setTodos } = useContext(TodosContext);
+
+	const onClickComplete = (index: number) => {
+		const newTodos = [...todos];
+		newTodos[index].completed = !newTodos[index].completed;
+		setTodos(newTodos);
+	};
 	const onClickDelete = () => alert("deleted!");
 	const onClickTextFix = () => alert("fix!");
-
-	const { todos } = useContext(TodosContext);
 
 	return (
 		<ChakraProvider theme={theme}>
@@ -24,7 +28,7 @@ export const App = () => {
 					<TodoItem
 						key={index}
 						text={res.todo}
-						onClickComplete={onClickComplete}
+						onClickComplete={() => onClickComplete(index)}
 						onClickDelete={onClickDelete}
 						onClickTextFix={onClickTextFix}
 					/>
