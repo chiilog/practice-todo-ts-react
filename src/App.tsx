@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, ChakraProvider, List } from "@chakra-ui/react";
+import { Box, ChakraProvider, Input, List } from "@chakra-ui/react";
 
 import theme from "./theme/theme";
 import { Header } from "./components/organisms/Header";
@@ -48,20 +48,30 @@ export const App = () => {
 				{todos.map((res, index) => (
 					<TodoItem
 						key={index}
-						text={res.todo}
 						onClickComplete={() => onClickComplete(index)}
 						onClickDelete={() => onClickDelete(index)}
-						onClickTextEdit={(
-							event: React.MouseEvent<HTMLInputElement>
-						) => onClickTextEdit(event)}
-						onBlurTextEdit={(
-							event: React.FocusEvent<HTMLInputElement>
-						) => onBlurTextEdit(event)}
-						onChangeTextEdit={(
-							event: React.ChangeEvent<HTMLInputElement>
-						) => onChangeTextEdit(event, index)}
 						isCompleted={res.completed}
-					/>
+					>
+						<Box mx={1} flex={1}>
+							<Input
+								value={res.todo}
+								variant="unstyle"
+								color={res.completed ? "gray.300" : "black"}
+								isReadOnly
+								bg="gray.50"
+								_readOnly={{ background: "white" }}
+								onClick={(
+									event: React.MouseEvent<HTMLInputElement>
+								) => onClickTextEdit(event)}
+								onBlur={(
+									event: React.FocusEvent<HTMLInputElement>
+								) => onBlurTextEdit(event)}
+								onChange={(
+									event: React.ChangeEvent<HTMLInputElement>
+								) => onChangeTextEdit(event, index)}
+							/>
+						</Box>
+					</TodoItem>
 				))}
 			</List>
 		</ChakraProvider>
