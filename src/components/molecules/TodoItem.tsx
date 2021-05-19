@@ -1,6 +1,6 @@
 import { Flex, IconButton, ListItem } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
-import React, { memo, ReactNode, VFC } from "react";
+import React, { ReactNode, VFC } from "react";
 
 type Props = {
 	onClickComplete: () => void;
@@ -9,7 +9,7 @@ type Props = {
 	children: ReactNode;
 };
 
-export const TodoItem: VFC<Props> = memo((props) => {
+export const TodoItem: VFC<Props> = (props) => {
 	const { onClickComplete, onClickDelete, isCompleted, children } = props;
 
 	return (
@@ -35,4 +35,4 @@ export const TodoItem: VFC<Props> = memo((props) => {
 			</Flex>
 		</ListItem>
 	);
-});
+};

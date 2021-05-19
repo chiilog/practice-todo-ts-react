@@ -1,6 +1,5 @@
 import React, {
 	FormEvent,
-	memo,
 	useCallback,
 	useContext,
 	useState,
@@ -11,13 +10,16 @@ import { Box, Flex, Heading, Input } from "@chakra-ui/react";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import { TodosContext } from "../../providers/TodosProvider";
 
-export const Header: VFC = memo(() => {
+export const Header: VFC = () => {
 	const [todoText, setTodoText] = useState<string>("");
 	const { todos, setTodos } = useContext(TodosContext);
 
-	const onChangeTodoText = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTodoText(event.target.value);
-	};
+	const onChangeTodoText = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			setTodoText(event.target.value);
+		},
+		[setTodoText]
+	);
 
 	const onClickAddTodo = useCallback(() => {
 		if (todoText !== "") {
@@ -32,6 +34,7 @@ export const Header: VFC = memo(() => {
 			setTodoText("");
 		}
 	}, [setTodos, todoText, todos]);
+	console.log(todos);
 
 	return (
 		<>
@@ -62,4 +65,4 @@ export const Header: VFC = memo(() => {
 			</form>
 		</>
 	);
-});
+};
