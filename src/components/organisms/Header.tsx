@@ -1,10 +1,10 @@
-import React, { FormEvent, useContext, useState, VFC } from "react";
+import React, { FC, FormEvent, useContext, useState } from "react";
 import { Box, Flex, Heading, Input } from "@chakra-ui/react";
 
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import { TodosContext } from "../../providers/TodosProvider";
 
-export const Header: VFC = () => {
+export const Header: FC = () => {
 	const [todoText, setTodoText] = useState<string>("");
 	const { todos, setTodos } = useContext(TodosContext);
 
