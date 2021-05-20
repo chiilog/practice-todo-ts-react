@@ -1,10 +1,4 @@
-import React, {
-	FormEvent,
-	useCallback,
-	useContext,
-	useState,
-	VFC,
-} from "react";
+import React, { FormEvent, useContext, useState, VFC } from "react";
 import { Box, Flex, Heading, Input } from "@chakra-ui/react";
 
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
@@ -14,14 +8,11 @@ export const Header: VFC = () => {
 	const [todoText, setTodoText] = useState<string>("");
 	const { todos, setTodos } = useContext(TodosContext);
 
-	const onChangeTodoText = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			setTodoText(event.target.value);
-		},
-		[setTodoText]
-	);
+	const onChangeTodoText = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTodoText(event.target.value);
+	};
 
-	const onClickAddTodo = useCallback(() => {
+	const onClickAddTodo = () => {
 		if (todoText !== "") {
 			setTodos([
 				...todos,
@@ -33,8 +24,7 @@ export const Header: VFC = () => {
 			]);
 			setTodoText("");
 		}
-	}, [setTodos, todoText, todos]);
-	console.log(todos);
+	};
 
 	return (
 		<>
