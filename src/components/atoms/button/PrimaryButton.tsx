@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import { Button } from "@chakra-ui/react";
 
 type Props = {
-	children: string;
+	children: ReactNode;
 	onClickButton?: () => void;
-	buttonType: "button" | "submit" | "reset" | undefined;
+	buttonType?: "button" | "submit" | "reset";
 };
 
 export const PrimaryButton: FC<Props> = (props) => {
