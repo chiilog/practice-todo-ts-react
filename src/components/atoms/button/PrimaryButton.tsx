@@ -7,11 +7,12 @@ type Props = {
   buttonType?: "button" | "submit" | "reset";
 };
 
-export const PrimaryButton: FC<Props> = (props) => {
+export const PrimaryButton: FC<Props> = ({
+  children,
+  onClickButton,
+  buttonType,
+}) => {
   console.log("PrimaryButton");
-
-  const { children, onClickButton, buttonType } = props;
-
   return (
     <Button
       colorScheme="red"
