@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Box, Input, List } from "@chakra-ui/react";
 
 import { TodoItem } from "../molecules/TodoItem";
@@ -22,7 +22,7 @@ export const TodoList = () => {
 
   return (
     <List my={4} bg="white" boxShadow="md">
-      {todos.map((res, index) => (
+      {todos.map<ReactNode>((res, index) => (
         <TodoItem
           key={index}
           onClickComplete={() => onCompleteTodo(index)}
