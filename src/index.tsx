@@ -4,8 +4,8 @@ import { App } from "./App";
 import { TodosProvider } from "./providers/TodosProvider";
 
 ReactDOM.render(
-	<TodosProvider>
-		<App />
-	</TodosProvider>,
-	document.getElementById("root")
+  <TodosProvider>
+    <App />
+  </TodosProvider>,
+  document.getElementById("root")
 );
