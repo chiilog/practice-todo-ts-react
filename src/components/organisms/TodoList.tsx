@@ -8,18 +8,6 @@ export const TodoList: FC = () => {
   console.log("TodoList");
   const { todos, toggleTodoState, deleteTodo, updateTodo } = useTodos();
 
-  const onClickStatus = (event: React.MouseEvent<HTMLInputElement>) => {
-    const target = event.currentTarget;
-    target.readOnly = !target.readOnly;
-    target.setAttribute("aria-readonly", `"${target.readOnly}"`);
-  };
-
-  const onBlurStatus = (event: React.FocusEvent<HTMLInputElement>) => {
-    const target = event.currentTarget;
-    target.readOnly = true;
-    target.setAttribute("aria-readonly", "true");
-  };
-
   return (
     <List my={4} bg="white" boxShadow="md">
       {todos.map<ReactNode>((res, index) => (
@@ -37,12 +25,16 @@ export const TodoList: FC = () => {
               isReadOnly
               bg="gray.50"
               _readOnly={{ background: "white" }}
-              onClick={(event: React.MouseEvent<HTMLInputElement>) =>
-                onClickStatus(event)
-              }
-              onBlur={(event: React.FocusEvent<HTMLInputElement>) =>
-                onBlurStatus(event)
-              }
+              onClick={(event: React.MouseEvent<HTMLInputElement>) => {
+                const target = event.currentTarget;
+                target.readOnly = !target.readOnly;
+                target.setAttribute("aria-readonly", `"${target.readOnly}"`);
+              }}
+              onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
+                const target = event.currentTarget;
+                target.readOnly = true;
+                target.setAttribute("aria-readonly", "true");
+              }}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 updateTodo(event.target.value, index)
               }
