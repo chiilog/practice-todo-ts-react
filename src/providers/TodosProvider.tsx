@@ -4,6 +4,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useState,
+  FC,
 } from "react";
 import { Todo } from "../types/todo";
 
@@ -16,20 +17,19 @@ export const TodosContext = createContext<TodosContextType>(
   {} as TodosContextType
 );
 
-export const TodosProvider = (props: { children: ReactNode }) => {
-  const { children } = props;
-  const [todos, setTodos] = useState<Todo[]>([
-    {
-      id: 1,
-      todo: "todo1つ目",
-      completed: false,
-    },
-    {
-      id: 2,
-      todo: "todo2つ目",
-      completed: true,
-    },
-  ]);
+const initialState: Todo[] = [
+  {
+    todo: "todo1つ目",
+    completed: false,
+  },
+  {
+    todo: "todo2つ目",
+    completed: true,
+  },
+];
+
+export const TodosProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [todos, setTodos] = useState<Todo[]>(initialState);
 
   return (
     <TodosContext.Provider value={{ todos, setTodos }}>
