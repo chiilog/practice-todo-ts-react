@@ -1,46 +1,46 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { TodosContext, TodosContextType } from "../providers/TodosProvider";
+import { Todo } from "../types/todo";
 
-export const useTodos = () => {
+type ReturnType = {
+  todos: Todo[];
+  addTodo: (s: string) => void;
+  toggleTodoState: (index: number) => void;
+  deleteTodo: (index: number) => void;
+  updateTodo: (text: string, index: number) => void;
+};
+
+export const useTodos = (): ReturnType => {
+  /**
+   * TODO: ProviderをやめてuseReducerに変える
+   */
   const { todos, setTodos } = useContext<TodosContextType>(TodosContext);
 
   const addTodo = (text: string) => {
-    setTodos([
-      ...todos,
-      {
-        id: todos.length + 1,
-        todo: text,
-        completed: false,
-      },
-    ]);
+    setTodos([...todos, { todo: text, completed: false }]);
   };
 
-  const onCompleteTodo = (index: number) => {
+  const toggleTodoState = (index: number) => {
     const newTodos = [...todos];
     newTodos[index].completed = !newTodos[index].completed;
     setTodos(newTodos);
   };
 
-  const onDeleteTodo = (index: number) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const deleteTodo = (index: number) => {
+    setTodos(todos.filter((_, i) => i !== index));
   };
 
-  const onEditTodo = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const editTodo = [...todos];
-    editTodo[index].todo = event.target.value;
-    setTodos(editTodo);
+  const updateTodo = (text: string, index: number) => {
+    const newTodos = [...todos];
+    newTodos[index].todo = text;
+    setTodos(newTodos);
   };
 
   return {
     todos,
     addTodo,
-    onCompleteTodo,
-    onDeleteTodo,
-    onEditTodo,
+    toggleTodoState,
+    deleteTodo,
+    updateTodo,
   };
 };

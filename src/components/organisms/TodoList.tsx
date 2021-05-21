@@ -1,12 +1,12 @@
-import React, { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import { Box, Input, List } from "@chakra-ui/react";
 
 import { TodoItem } from "../molecules/TodoItem";
 import { useTodos } from "../../hooks/useTodos";
 
-export const TodoList = () => {
+export const TodoList: FC = () => {
   console.log("TodoList");
-  const { todos, onCompleteTodo, onDeleteTodo, onEditTodo } = useTodos();
+  const { todos, toggleTodoState, deleteTodo, updateTodo } = useTodos();
 
   const onClickStatus = (event: React.MouseEvent<HTMLInputElement>) => {
     const target = event.currentTarget;
@@ -25,8 +25,8 @@ export const TodoList = () => {
       {todos.map<ReactNode>((res, index) => (
         <TodoItem
           key={index}
-          onClickComplete={() => onCompleteTodo(index)}
-          onClickDelete={() => onDeleteTodo(index)}
+          onClickComplete={() => toggleTodoState(index)}
+          onClickDelete={() => deleteTodo(index)}
           isCompleted={res.completed}
         >
           <Box mx={1} flex={1}>
@@ -44,7 +44,7 @@ export const TodoList = () => {
                 onBlurStatus(event)
               }
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                onEditTodo(event, index)
+                updateTodo(event.target.value, index)
               }
             />
           </Box>
