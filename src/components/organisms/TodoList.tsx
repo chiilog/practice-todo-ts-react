@@ -3,12 +3,22 @@ import { Box, Input, List } from "@chakra-ui/react";
 
 import { TodoItem } from "../molecules/TodoItem";
 import { useTodos } from "../../hooks/useTodos";
-import { useEditStatus } from "../../hooks/useEditStatus";
 
 export const TodoList = () => {
   console.log("TodoList");
   const { todos, onCompleteTodo, onDeleteTodo, onEditTodo } = useTodos();
-  const { onClickStatus, onBlurStatus } = useEditStatus();
+
+  const onClickStatus = (event: React.MouseEvent<HTMLInputElement>) => {
+    const target = event.currentTarget;
+    target.readOnly = !target.readOnly;
+    target.setAttribute("aria-readonly", `"${target.readOnly}"`);
+  };
+
+  const onBlurStatus = (event: React.FocusEvent<HTMLInputElement>) => {
+    const target = event.currentTarget;
+    target.readOnly = true;
+    target.setAttribute("aria-readonly", "true");
+  };
 
   return (
     <List my={4} bg="white" boxShadow="md">
