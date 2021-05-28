@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useState } from "react";
+import React, { FC, FormEvent, useRef, useState } from "react";
 import { Box, Flex, Heading, Input } from "@chakra-ui/react";
 
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
@@ -8,16 +8,15 @@ export const Header: FC = () => {
   console.log("Header");
 
   const [todoText, setTodoText] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { addTodo } = useTodos();
 
-  const onChangeTodoText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoText(event.target.value);
-  };
-
-  const onClickAddTodo = () => {
-    if (todoText !== "") {
-      addTodo(todoText);
-      setTodoText("");
+  const addTodos = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (inputRef.current !== null && inputRef.current.value !== "") {
+      addTodo(inputRef.current.value);
+      inputRef.current.value = "";
     }
   };
 
@@ -28,19 +27,17 @@ export const Header: FC = () => {
           TODO管理
         </Heading>
       </Box>
-      <form
-        onSubmit={(e: FormEvent<HTMLFormElement>) => {
-          e.preventDefault();
-          onClickAddTodo();
-        }}
-      >
+      <form onSubmit={addTodos}>
         <Flex m={4}>
           <Box flex="1">
+            {todoText}
             <Input
               placeholder="TODOを入力"
               bg="white"
-              value={todoText}
-              onChange={onChangeTodoText}
+              ref={inputRef}
+              onChange={() => {
+                setTodoText(todoText);
+              }}
             />
           </Box>
           <Box ml={2}>
