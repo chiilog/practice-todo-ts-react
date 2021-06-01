@@ -1,4 +1,4 @@
-import { useContext, useReducer } from "react";
+import { useContext } from "react";
 import { TodosContext, TodosContextType } from "../providers/TodosProvider";
 import { Todo } from "../types/todo";
 
@@ -7,45 +7,16 @@ type ReturnType = {
   toggleTodoState: (index: number) => void;
   deleteTodo: (index: number) => void;
   updateTodo: (text: string, index: number) => void;
-  todo2: Todo[];
+  todos2: Todo[];
   addTodo: (text: string) => void;
 };
-
-/**
- * TODO: any型をなおす
- */
-const todoReducer = (todos: Todo[], action: any) => {
-  switch (action.type) {
-    case "add":
-      return [
-        ...todos,
-        {
-          todo: action.text,
-          completed: false,
-        },
-      ];
-    default:
-      return todos;
-  }
-};
-
-const initialTodos: Todo[] = [
-  {
-    todo: "todo1つ目",
-    completed: false,
-  },
-  {
-    todo: "todo2つ目",
-    completed: true,
-  },
-];
 
 export const useTodos = (): ReturnType => {
   /**
    * TODO: ProviderをやめてuseReducerに変える
    */
-  const { todos, setTodos } = useContext<TodosContextType>(TodosContext);
-  const [todo2, dispatch] = useReducer(todoReducer, initialTodos);
+  const { todos, setTodos, todos2, dispatch } =
+    useContext<TodosContextType>(TodosContext);
 
   const addTodo = (text: string) => {
     dispatch({ type: "add", text: text });
@@ -72,7 +43,7 @@ export const useTodos = (): ReturnType => {
     toggleTodoState,
     deleteTodo,
     updateTodo,
-    todo2,
+    todos2,
     addTodo,
   };
 };

@@ -6,12 +6,12 @@ import { useTodos } from "../../hooks/useTodos";
 
 export const TodoList: FC = () => {
   console.log("TodoList");
-  const { todos, toggleTodoState, deleteTodo, updateTodo, todo2 } = useTodos();
-  console.log(todo2);
+  const { todos, toggleTodoState, deleteTodo, updateTodo, todos2 } = useTodos();
+  console.log(todos2);
 
   return (
     <List my={4} bg="white" boxShadow="md">
-      {todo2.map<ReactNode>((res, index) => (
+      {todos2.map<ReactNode>((res, index) => (
         <TodoItem
           key={index}
           onClickComplete={() => toggleTodoState(index)}
