@@ -7,6 +7,8 @@ import React, {
   FC,
   useReducer,
 } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { Todo } from "../types/todo";
 
 /**
@@ -32,6 +34,7 @@ const reducer = (todos: Todo[], action: any) => {
       return [
         ...todos,
         {
+          id: uuidv4(),
           todo: action.text,
           completed: false,
         },
@@ -43,10 +46,12 @@ const reducer = (todos: Todo[], action: any) => {
 
 const initialState: Todo[] = [
   {
+    id: uuidv4(),
     todo: "todo1つ目",
     completed: false,
   },
   {
+    id: uuidv4(),
     todo: "todo2つ目",
     completed: true,
   },
