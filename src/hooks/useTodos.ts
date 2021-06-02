@@ -24,9 +24,6 @@ export const useTodos = (): ReturnType => {
 
   const toggleTodoState = (id: string) => {
     dispatch({ type: "toggle", payload: { id } });
-    // const newTodos = [...todos];
-    // newTodos[index].completed = !newTodos[index].completed;
-    // setTodos(newTodos);
   };
 
   const deleteTodo = (index: number) => {
