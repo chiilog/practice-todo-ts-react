@@ -14,7 +14,7 @@ export const TodoList: FC = () => {
       {todos2.map<ReactNode>((res, index) => (
         <TodoItem
           key={index}
-          onClickComplete={() => toggleTodoState(index)}
+          onClickComplete={() => toggleTodoState(res.id)}
           onClickDelete={() => deleteTodo(index)}
           isCompleted={res.completed}
         >

@@ -4,7 +4,7 @@ import { Todo } from "../types/todo";
 
 type ReturnType = {
   todos: Todo[];
-  toggleTodoState: (index: number) => void;
+  toggleTodoState: (id: string) => void;
   deleteTodo: (index: number) => void;
   updateTodo: (text: string, index: number) => void;
   todos2: Todo[];
@@ -19,13 +19,14 @@ export const useTodos = (): ReturnType => {
     useContext<TodosContextType>(TodosContext);
 
   const addTodo = (text: string) => {
-    dispatch({ type: "add", text: text });
+    dispatch({ type: "add", payload: { text } });
   };
 
-  const toggleTodoState = (index: number) => {
-    const newTodos = [...todos];
-    newTodos[index].completed = !newTodos[index].completed;
-    setTodos(newTodos);
+  const toggleTodoState = (id: string) => {
+    dispatch({ type: "toggle", payload: { id } });
+    // const newTodos = [...todos];
+    // newTodos[index].completed = !newTodos[index].completed;
+    // setTodos(newTodos);
   };
 
   const deleteTodo = (index: number) => {

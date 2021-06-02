@@ -35,10 +35,16 @@ const reducer = (todos: Todo[], action: any) => {
         ...todos,
         {
           id: uuidv4(),
-          todo: action.text,
+          todo: action.payload.text,
           completed: false,
         },
       ];
+    case "toggle":
+      return todos.map((todo) =>
+        todo.id === action.payload.id
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      );
     default:
       return todos;
   }
