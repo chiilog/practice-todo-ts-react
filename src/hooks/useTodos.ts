@@ -30,7 +30,7 @@ export const useTodos = (): ReturnType => {
   };
 
   const deleteTodo = (index: number) => {
-    setTodos(todos.filter((_, i) => i !== index));
+    dispatch({ type: "delete", payload: { index } });
   };
 
   const updateTodo = (text: string, index: number) => {

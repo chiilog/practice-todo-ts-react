@@ -45,6 +45,8 @@ const reducer = (todos: Todo[], action: any) => {
           ? { ...todo, completed: !todo.completed }
           : todo
       );
+    case "delete":
+      return todos.filter((_, index) => index !== action.payload.index);
     default:
       return todos;
   }
