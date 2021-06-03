@@ -37,7 +37,7 @@ export const TodoList: FC = () => {
                 target.setAttribute("aria-readonly", "true");
               }}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                updateTodo(event.target.value, index)
+                updateTodo(event.target.value, res.id)
               }
             />
           </Box>

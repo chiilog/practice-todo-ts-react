@@ -6,7 +6,7 @@ type ReturnType = {
   todos: Todo[];
   toggleTodoState: (id: string) => void;
   deleteTodo: (index: number) => void;
-  updateTodo: (text: string, index: number) => void;
+  updateTodo: (text: string, id: string) => void;
   todos2: Todo[];
   addTodo: (text: string) => void;
 };
@@ -30,10 +30,8 @@ export const useTodos = (): ReturnType => {
     dispatch({ type: "deleteTodo", payload: { index } });
   };
 
-  const updateTodo = (text: string, index: number) => {
-    const newTodos = [...todos];
-    newTodos[index].todo = text;
-    setTodos(newTodos);
+  const updateTodo = (text: string, id: string) => {
+    dispatch({ type: "updateTodo", payload: { id, text } });
   };
 
   return {

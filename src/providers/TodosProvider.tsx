@@ -47,6 +47,12 @@ const reducer = (todos: Todo[], action: any) => {
       );
     case "deleteTodo":
       return todos.filter((_, index) => index !== action.payload.index);
+    case "updateTodo":
+      return todos.map((todo) =>
+        todo.id === action.payload.id
+          ? { ...todo, todo: action.payload.text }
+          : todo
+      );
     default:
       return todos;
   }
