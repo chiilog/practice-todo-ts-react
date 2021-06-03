@@ -3,6 +3,7 @@ import { Box, Flex, Heading, Input } from "@chakra-ui/react";
 
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import { useTodos } from "../../hooks/useTodos";
+import { todoFactory } from "../../types/todo";
 
 export const Header: FC = () => {
   console.log("Header");
@@ -15,7 +16,8 @@ export const Header: FC = () => {
   const addTodos = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputRef.current !== null && inputRef.current.value !== "") {
-      addTodo(inputRef.current.value);
+      const todo = todoFactory({ todo: inputRef.current.value });
+      addTodo(todo);
       inputRef.current.value = "";
     }
   };

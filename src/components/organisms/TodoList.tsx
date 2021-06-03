@@ -6,23 +6,26 @@ import { useTodos } from "../../hooks/useTodos";
 
 export const TodoList: FC = () => {
   console.log("TodoList");
-  const { todos, toggleTodoState, deleteTodo, updateTodo } = useTodos();
+  const { todos, deleteTodo, updateTodo } = useTodos();
   console.log(todos);
 
   return (
     <List my={4} bg="white" boxShadow="md">
-      {todos.map<ReactNode>((res, index) => (
+      {todos.map<ReactNode>((todo, index) => (
         <TodoItem
           key={index}
-          onClickComplete={() => toggleTodoState(res.id)}
-          onClickDelete={() => deleteTodo(index)}
-          isCompleted={res.completed}
+          onClickComplete={() => {
+            const newTodo = { ...todo, completed: !todo.completed };
+            updateTodo(newTodo);
+          }}
+          onClickDelete={() => deleteTodo(todo)}
+          isCompleted={todo.completed}
         >
           <Box mx={1} flex={1}>
             <Input
-              value={res.todo}
+              value={todo.todo}
               variant="unstyle"
-              color={res.completed ? "gray.300" : "black"}
+              color={todo.completed ? "gray.300" : "black"}
               isReadOnly
               bg="gray.50"
               _readOnly={{ background: "white" }}
@@ -36,9 +39,10 @@ export const TodoList: FC = () => {
                 target.readOnly = true;
                 target.setAttribute("aria-readonly", "true");
               }}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                updateTodo(event.target.value, res.id)
-              }
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                const newTodo = { ...todo, todo: event.target.value };
+                updateTodo(newTodo);
+              }}
             />
           </Box>
         </TodoItem>

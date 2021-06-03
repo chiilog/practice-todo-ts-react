@@ -2,36 +2,28 @@ import { useContext } from "react";
 import { TodosContext, TodosContextType } from "../providers/TodosProvider";
 import { Todo } from "../types/todo";
 
-type ReturnType = {
+export const useTodos = (): {
   todos: Todo[];
-  toggleTodoState: (id: string) => void;
-  deleteTodo: (index: number) => void;
-  updateTodo: (text: string, id: string) => void;
-  addTodo: (text: string) => void;
-};
-
-export const useTodos = (): ReturnType => {
+  deleteTodo: (todo: Todo) => void;
+  updateTodo: (todo: Todo) => void;
+  addTodo: (todo: Todo) => void;
+} => {
   const { todos, dispatch } = useContext<TodosContextType>(TodosContext);
 
-  const addTodo = (text: string) => {
-    dispatch({ type: "addTodo", payload: { text } });
+  const addTodo = (todo: Todo) => {
+    dispatch({ type: "addTodo", payload: todo });
   };
 
-  const toggleTodoState = (id: string) => {
-    dispatch({ type: "toggleCompleted", payload: { id } });
+  const deleteTodo = (todo: Todo) => {
+    dispatch({ type: "deleteTodo", payload: todo });
   };
 
-  const deleteTodo = (index: number) => {
-    dispatch({ type: "deleteTodo", payload: { index } });
-  };
-
-  const updateTodo = (text: string, id: string) => {
-    dispatch({ type: "updateTodo", payload: { id, text } });
+  const updateTodo = (todo: Todo) => {
+    dispatch({ type: "updateTodo", payload: todo });
   };
 
   return {
     todos,
-    toggleTodoState,
     deleteTodo,
     updateTodo,
     addTodo,
