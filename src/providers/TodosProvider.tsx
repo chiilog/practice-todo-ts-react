@@ -30,7 +30,7 @@ export const TodosContext = createContext<TodosContextType>(
  */
 const reducer = (todos: Todo[], action: any) => {
   switch (action.type) {
-    case "add":
+    case "addTodo":
       return [
         ...todos,
         {
@@ -39,13 +39,13 @@ const reducer = (todos: Todo[], action: any) => {
           completed: false,
         },
       ];
-    case "toggle":
+    case "toggleCompleted":
       return todos.map((todo) =>
         todo.id === action.payload.id
           ? { ...todo, completed: !todo.completed }
           : todo
       );
-    case "delete":
+    case "deleteTodo":
       return todos.filter((_, index) => index !== action.payload.index);
     default:
       return todos;

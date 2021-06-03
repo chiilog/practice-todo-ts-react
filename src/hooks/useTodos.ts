@@ -19,15 +19,15 @@ export const useTodos = (): ReturnType => {
     useContext<TodosContextType>(TodosContext);
 
   const addTodo = (text: string) => {
-    dispatch({ type: "add", payload: { text } });
+    dispatch({ type: "addTodo", payload: { text } });
   };
 
   const toggleTodoState = (id: string) => {
-    dispatch({ type: "toggle", payload: { id } });
+    dispatch({ type: "toggleCompleted", payload: { id } });
   };
 
   const deleteTodo = (index: number) => {
-    dispatch({ type: "delete", payload: { index } });
+    dispatch({ type: "deleteTodo", payload: { index } });
   };
 
   const updateTodo = (text: string, index: number) => {
