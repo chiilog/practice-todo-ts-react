@@ -11,9 +11,6 @@ type ReturnType = {
 };
 
 export const useTodos = (): ReturnType => {
-  /**
-   * TODO: ProviderをやめてuseReducerに変える
-   */
   const { todos, dispatch } = useContext<TodosContextType>(TodosContext);
 
   const addTodo = (text: string) => {
