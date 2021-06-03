@@ -1,12 +1,4 @@
-import React, {
-  createContext,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-  useState,
-  FC,
-  useReducer,
-} from "react";
+import React, { createContext, ReactNode, FC, useReducer } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Todo } from "../types/todo";
@@ -16,8 +8,6 @@ import { Todo } from "../types/todo";
  */
 export type TodosContextType = {
   todos: Todo[];
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
-  todos2: Todo[];
   dispatch: any;
 };
 
@@ -72,11 +62,10 @@ const initialState: Todo[] = [
 ];
 
 export const TodosProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [todos, setTodos] = useState<Todo[]>(initialState);
-  const [todos2, dispatch] = useReducer(reducer, initialState);
+  const [todos, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <TodosContext.Provider value={{ todos, setTodos, todos2, dispatch }}>
+    <TodosContext.Provider value={{ todos, dispatch }}>
       {children}
     </TodosContext.Provider>
   );

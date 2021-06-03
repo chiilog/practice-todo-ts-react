@@ -7,7 +7,6 @@ type ReturnType = {
   toggleTodoState: (id: string) => void;
   deleteTodo: (index: number) => void;
   updateTodo: (text: string, id: string) => void;
-  todos2: Todo[];
   addTodo: (text: string) => void;
 };
 
@@ -15,8 +14,7 @@ export const useTodos = (): ReturnType => {
   /**
    * TODO: ProviderをやめてuseReducerに変える
    */
-  const { todos, setTodos, todos2, dispatch } =
-    useContext<TodosContextType>(TodosContext);
+  const { todos, dispatch } = useContext<TodosContextType>(TodosContext);
 
   const addTodo = (text: string) => {
     dispatch({ type: "addTodo", payload: { text } });
@@ -39,7 +37,6 @@ export const useTodos = (): ReturnType => {
     toggleTodoState,
     deleteTodo,
     updateTodo,
-    todos2,
     addTodo,
   };
 };
