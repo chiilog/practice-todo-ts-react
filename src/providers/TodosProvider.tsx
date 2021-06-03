@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, FC, useReducer } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  FC,
+  useReducer,
+  Reducer,
+} from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Todo } from "../types/todo";
@@ -15,10 +21,16 @@ export const TodosContext = createContext<TodosContextType>(
   {} as TodosContextType
 );
 
-/**
- * TODO: any型をなおす
- */
-const reducer = (todos: Todo[], action: any) => {
+type reducerType = {
+  type: "addTodo" | "toggleCompleted" | "deleteTodo" | "updateTodo";
+  payload: {
+    text?: string;
+    id?: string;
+    index?: number;
+  };
+};
+
+const reducer: Reducer<Todo[], reducerType> = (todos, action) => {
   switch (action.type) {
     case "addTodo":
       return [
